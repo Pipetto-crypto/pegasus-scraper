@@ -5,6 +5,7 @@ Simple bash script that mainly scrapes games for you, eventually it can configur
 Download termux from fdroid and paste the following commands:
 
 termux-setup-storage,  answer yes when prompted.
+
 curl -O -L https://github.com/Pipetto-crypto/pegasus-scraper/raw/master/installer.sh && source installer.sh
 
 Paste bash configurator.sh everytime you want to scrape new games.
@@ -19,18 +20,18 @@ During the execution, you will be prompted to edit the config file with nano, it
 
 The configurator script will allow you to do the following tasks:
 
-1.Edit the config file with nano to add new systems.
+1. Edit the config file with nano to add new systems.
 
-2.Scrape your games by selecting platforms and scraping modules:
+2. Scrape your games by selecting platforms and scraping modules:
 
 For a list of supported platforms refer to this: https://github.com/muldjord/skyscraper/blob/master/docs/PLATFORMS.md
 
 For a list of supported scraping modules refer to this: https://github.com/muldjord/skyscraper/blob/master/docs/SCRAPINGMODULES.md
 
-3.Add a launch command to the metadata file, required for Pegasus to open your games with an emulator. 
+3. Add a launch command to the metadata file, required for Pegasus to open your games with an emulator. 
 
-During the execution of this operation, you will be prompted for a second time to edit a text file with nano. I could automatize this operation but it will require more disk space but in the future I may consider this option.
+During the execution of this operation, you will be prompted for a second time to edit a text file with nano. 
 
 For a list of launch commands, you may refer to this: https://pegasus-frontend.org/tools/metagen-android/
 
-4.Configure Pegasus to be able to launch your games
+4. Configure Pegasus to be able to launch your games
