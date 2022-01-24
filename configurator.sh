@@ -38,7 +38,12 @@ then
 		then 
 			echo -e "\nLaunch command already present, skipping"; sleep 3
 		else
-			nano $f/metadata.pegasus.txt
+			case awk 'NR==2' $f/metadata.pegasus.txt in
+			shortname: ps2)
+				sed -i '3s/^/launch: am start\n -n xyz.aethersx2.android/.EmulationActivity\n -a android.intent.action.MAIN\n -e bootPath "{file.documenturi}"' $f/metadata.pegasus.txt
+				;;
+			esac
+
 		fi
 done
 fi
