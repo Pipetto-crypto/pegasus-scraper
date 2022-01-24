@@ -1,0 +1,7 @@
+/sdcard/ROMs/PS2
+/sdcard/ROMs/3DS
+/sdcard/ROMs/PSX
+/sdcard/ROMs/N64
+/sdcard/ROMs/NDS
+/sdcard/ROMs/PSP
+/sdcard/ROMs/GAMECUBE

@@ -11,6 +11,7 @@ then
         	for i in $plats
                 do
                         skyscraper -p $i -s $scrap
+			skyscraper -p $i
                 done
 	fi
 else
@@ -22,7 +23,8 @@ else
 		read -p "Select scraper to use, screenscraper highly suggested:"  scrap
 		for i in $plats
 		do
-			skyscraper -p $i -s $scrap	
+			skyscraper -p $i -s $scrap
+			skyscraper -p $i	
 		done	
 	fi
 fi
@@ -30,7 +32,6 @@ fi
 read -p "Do you want to insert launch commands for your emualtors?(y/n)" prompt4
 if test $prompt4 == "y";
 then
-	echo -e "\nInserting launch commands, you may refer to them on the github page according to the emulator you want to use.You can paste them below shortname line. Once you are done ctrl+o to save, ctrl+x to exit"; sleep 15
 	grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
 	for f in $(cat temp.txt)
 	do
@@ -38,17 +39,16 @@ then
 		then 
 			echo -e "\nLaunch command already present, skipping"; sleep 3
 		else
-			case awk 'NR==2' $f/metadata.pegasus.txt in
-			shortname: ps2)
-				sed -i '3s/^/launch: am start\n -n xyz.aethersx2.android/.EmulationActivity\n -a android.intent.action.MAIN\n -e bootPath "{file.documenturi}"' $f/metadata.pegasus.txt
-				;;
-			esac
-
+			if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: ps2';
+			then
+				PS2='launch: am start\n -n xyz.aethersx2.android/.EmulationActivity\n -a android.intent.action.MAIN\n -e bootPath "{file.documenturi}"\n'
+				sed -i "0,/^$/{s|^$|$PS2|}" $f/metadata.pegasus.txt
+			fi
 		fi
-done
+	done
 fi
 
-read -p "Do you want me to configure Pegasus for you?(y/n)" prompt5
+read -p "\nDo you want me to configure Pegasus for you?(y/n)" prompt5
 if test $prompt5 == "y";
 then
 	mkdir -p /sdcard/pegasus-frontend
