@@ -51,8 +51,34 @@ do
 			else
 				if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: ps2' > /dev/null;
 				then
+					echo -e "\nAdding AetherSX2 launch command"
 					PS2='launch: am start\n -n xyz.aethersx2.android/.EmulationActivity\n -a android.intent.action.MAIN\n -e bootPath "{file.documenturi}"\n'
 					sed -i "0,/^$/{s|^$|$PS2|}" $f/metadata.pegasus.txt
+				else if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: gc' > /dev/null;
+				then
+					echo -e "\nAdding Dolphin MMJR launch command"
+					GC='launch: am start\n -n org.mm.jr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
+					sed -i "0,/^$/{s|^$|$GC|}" $f/metadata.pegasus.txt			
+				else if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: wii' > /dev/null;
+				then
+					echo -e "\nAdding Dolphin MMJR launch command"
+					WII='launch: am start\n -n org.mm.jr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
+					sed -i "0,/^$/{s|^$|$WII|}" $f/metadata.pegasus.txt	sed -i "0,/^$/{s|^$|$GC|}" $f/metadata.pegasus.txt
+				else if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: psx' > /dev/null;
+				then
+					echo -e "\nAdding DuckStation launch command"
+					PSX='launch: am start\n -n com.github.stenzek.duckstation/.EmulationActivity\n -a android.intent.action.VIEW\n -e bootPath "{file.path}"\n --ez resumeState 0\n'
+					sed -i "0,/^$/{s|^$|$PSX|}" $f/metadata.pegasus.txt
+				else if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: n64' > /dev/null;
+				then
+					echo -e "\nAdding M64Plus Fz launch command"
+					N64='launch: am start\n -n org.mupen64plusae.v3.fzurita/paulscode.android.mupen64plusae.SplashActivity\n -a android.intent.action.VIEW\n -d "{file.uri}"\n'
+					sed -i "0,/^$/{s|^$|$N64|}" $f/metadata.pegasus.txt
+				else if awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: n64' > /dev/null;
+				then
+					echo -e "\nAdding M64Plus Fz launch command"
+					N64='launch: am start\n -n org.mupen64plusae.v3.fzurita/paulscode.android.mupen64plusae.SplashActivity\n -a android.intent.action.VIEW\n -d "{file.uri}"\n'
+					sed -i "0,/^$/{s|^$|$N64|}" $f/metadata.pegasus.txt
 				fi
 			fi
 		done
