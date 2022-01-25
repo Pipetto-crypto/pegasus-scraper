@@ -51,6 +51,32 @@ do
 	fi
 done
 
+
+while true
+do
+	read -p "Do you want to add launch commands manually(y/n)?(Read the DISCLAIMER)" pmtman
+	if "$pmtman" == "y";
+	then
+		grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
+		for f in $(cat temp.txt)
+		do
+			if grep -oq 'launch:' $f/metadata.pegasus.txt;
+			then 
+				echo -e "\nLaunch command already present, skipping"; sleep 3
+			else
+				nano $f/metadata.pegasus.txt
+			fi
+		done
+		break
+	else if "$pmtman" == "n";
+	then
+		break
+	else
+		echo -e "Invalid option, retry"
+	fi
+done
+
+
 while true
 do
 	read -p "Do you want to insert launch commands for your emualtors?(y/n)" prompt3
