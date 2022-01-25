@@ -1,13 +1,35 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+while true
+do
+	read -p "Before I start, do you want me to fetch Pegasus for you(y/n)" instpmt
+	if test "$instpmt" == "y";
+	then
+		wget -O pegasus.apk -L https://github.com/mmatyas/pegasus-frontend/releases/download/continuous/pegasus-fe_alpha15-101-g8425a4f6_android.apk 
+		mv pegasus.apk /sdcard
+		break
+	elif test "$instpmt" == "n";
+	then
+		break
+	else
+		echo -e "Invalid option, retry"
+		continue
+	fi
+done
 
-read -p "Before I start, do you want me to fetch Pegasus for you(y/n)" instpmt
-if test $instpmt == "y";
-then
-	wget -O pegasus.apk -L https://github.com/mmatyas/pegasus-frontend/releases/download/continuous/pegasus-fe_alpha15-101-g8425a4f6_android.apk 
-	mv pegasus.apk /sdcard
-fi
-read -p "Pegasus apk has been moved to the root of your internal storage, install it then press enter to continue" instscc 
+while true
+do
+	read -p "Pegasus apk has been moved to the root of your internal storage, install it then press enter to continue" instscc 
+	if test "$instscc" == "";
+	then
+		break
+	else
+		echo -e "Invalid option,retry"
+		continue
+	fi
+done
+
+
 echo -e "\n"
 echo -e "Updating, upgrading packages and install x11-repo"; sleep 2
 echo -e "\n"
