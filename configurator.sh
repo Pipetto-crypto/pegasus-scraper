@@ -1,18 +1,18 @@
 function hasRetroArch64(){
 if test -d /storage/emulated/0/Android/data/com.retroarch.aarch64;
 then
-	return true
+	return 0
 else
-	return false
+	return 1
 fi
 }
 
 function hasRetroArch32(){
 if test -d /storage/emulated/0/Android/data/com.retroarch;
 then
-	return true
+	return 0
 else
-	return false
+	return 1
 fi
 }
 
@@ -121,11 +121,11 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: nes' > /dev/null;
 				then
 					echo -e "\nAdding Nestopia Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						NES='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/nestopia_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$NES|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
 						NES='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/nestopia_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$NES|}" $f/metadata.pegasus.txt > /dev/null				
@@ -135,12 +135,13 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: snes' > /dev/null;
 				then
 					echo -e "\nAdding bsnes Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						SNES='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/bsnes_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$SNES|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
+
 						SNES='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/bsnes_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$SNES|}" $f/metadata.pegasus.txt > /dev/null				
 					else
@@ -149,11 +150,11 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: gbc' > /dev/null;
 				then
 					echo -e "\nAdding gambatte Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						GBC='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/gambatte_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GBC|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
 						GBC='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/gambatte_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GBC|}" $f/metadata.pegasus.txt > /dev/null				
@@ -163,11 +164,11 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: gb' > /dev/null;
 				then
 					echo -e "\nAdding gambatte Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						GB='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/gambatte_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GB|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
 						GB='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/gambatte_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GB|}" $f/metadata.pegasus.txt > /dev/null	
@@ -177,11 +178,11 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: gba' > /dev/null;
 				then
 					echo -e "\nAdding mgba Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						GBA='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/mgba_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GBA|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
 						GBA='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/mgba_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$GBA|}" $f/metadata.pegasus.txt > /dev/null	
@@ -191,11 +192,11 @@ do
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: psp' > /dev/null;
 				then
 					echo -e "\nAdding PPSSPP Retroarch core launch command"; sleep 3
-					if test hasRetroArch64;
+					if hasRetroArch64;
 					then
 						PSP='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null
-					elif test hasRetroArch32;
+					elif hasRetroArch32;
 					then
 						PSP='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
 						sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null
