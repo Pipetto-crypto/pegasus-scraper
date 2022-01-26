@@ -83,7 +83,7 @@ done
 
 while true
 do
-	read -p "Do you want to insert launch commands for your emulators?(y/n)" prompt3
+	read -p "Do you want to insert launch commands for your emulators(y/n)?:" prompt3
 	if test "$prompt3" == "y";
 	then
 		grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
