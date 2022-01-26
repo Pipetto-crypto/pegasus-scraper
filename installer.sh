@@ -2,27 +2,28 @@
 
 while true
 do
-	read -p "Before I start, do you want me to fetch Pegasus for you(y/n)" instpmt
+	read -p "Before I start, do you want me to fetch Pegasus for you?(y/n):" instpmt
 	if test "$instpmt" == "y";
-	then
+		then
 		wget -O pegasus.apk -L https://github.com/mmatyas/pegasus-frontend/releases/download/continuous/pegasus-fe_alpha15-101-g8425a4f6_android.apk 
 		mv pegasus.apk /storage/emulated/0
 		while true
 		do
-		read -p "Pegasus apk has been moved to the root of your internal storage, install it then press enter to continue" instscc 
-		if test "$instscc" == "";
-		then
-			break
-		else
-			echo -e "Invalid option,retry"
-			continue
-		fi
+			read -p "Pegasus apk has been moved to the root of your internal storage, install it then press enter to continue" instscc 
+			if test "$instscc" == "";
+			then
+				break
+			else
+				echo -e "Invalid option,retry"
+				continue
+			fi
+		done	
 		break
 	elif test "$instpmt" == "n";
 	then
 		break
 	else
-		echo -e "Invalid option, retry
+		echo -e "Invalid option, retry"
 		continue
 	fi
 done
