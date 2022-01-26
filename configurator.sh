@@ -191,18 +191,38 @@ do
 					fi
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: psp' > /dev/null 2>&1;
 				then
-					echo -e "\nAdding PPSSPP Retroarch core launch command"; sleep 3
-					if hasRetroArch64;
-					then
-						PSP='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
-						sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
-					elif hasRetroArch32;
-					then
-						PSP='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
-						sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
-					else
-						echo -e "Retroarch not installed,skipping"; sleep 3		
-					fi
+					while true 
+					do
+						echo -e "\n"
+						read -p "About to add PPSSPP RetroArch core. Do you want me to fall back to PPSSPP standalone app(only works with PPSSPP v1.11.3 and below)(y/n)?:" psppmt
+						if test "$psppmt" == "y";
+						then
+							echo -e "\nAdding PPSSPP launch command"; sleep 3
+							PSP='launch: am start\n -n org.ppsspp.ppsspp/.PpssppActivity\n -a android.intent.action.VIEW\n -d "{file.path}"\n'
+							sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
+							break
+						elif test "$psppmt" == "n";
+						then
+							echo -e "\nAdding PPSSPP Retroarch core launch command"; sleep 3
+							if hasRetroArch64;
+							then
+								PSP='launch: am start\n -n com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch.aarch64/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch.aarch64/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch.aarch64\n -e APK /data/app/com.retroarch.aarch64-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch.aarch64/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
+								sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
+								break
+							elif hasRetroArch32;
+							then
+								PSP='launch: am start\n -n com.retroarch/.browser.retroactivity.RetroActivityFuture\n -e ROM {file.path}\n -e LIBRETRO /data/data/com.retroarch/cores/ppsspp_libretro_android.so\n -e CONFIGFILE /storage/emulated/0/Android/data/com.retroarch/files/retroarch.cfg\n -e IME com.android.inputmethod.latin/.LatinIME\n -e DATADIR /data/data/com.retroarch\n -e APK /data/app/com.retroarch-1/base.apk\n -e SDCARD /storage/emulated/0\n -e EXTERNAL /storage/emulated/0/Android/data/com.retroarch/files\n --activity-clear-task\n --activity-clear-top\n --activity-no-history\n'
+								sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
+								break
+							else
+								echo -e "Retroarch not installed,skipping"; sleep 3		
+								break
+							fi
+						else
+							echo -e "Invalid option, retry"
+						fi
+					done		
+
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: nds' > /dev/null 2>&1;
 				then
 					echo -e "\nAdding Drastic launch command"; sleep 3
