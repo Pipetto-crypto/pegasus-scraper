@@ -271,7 +271,25 @@ do
 fi
 done
 
-echo -e "\nDone"
+while true 
+do
+	echo -e "\n"
+	read -p "Do you want to update the configuration script(y/n)?:" prompt5
+	if test "$prompt5" == "y";
+	then
+		rm -rf configurator.sh
+		wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
+		echo -e "\nUpdated"
+		break
+	elif test "$prompt5" == "n";
+	then
+		break
+	else 
+		echo -e "Invalid option, retry"
+	fi
+done
 
+
+echo -e "\nDone"
 rm -rf temp.txt
 
