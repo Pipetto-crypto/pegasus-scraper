@@ -228,6 +228,12 @@ do
 					echo -e "\nAdding Drastic launch command"; sleep 3
 					NDS='launch: am start\n -n com.dsemu.drastic/.DraSticActivity\n -a android.intent.action.VIEW\n -d "{file.path}"\n'
 					sed -i "0,/^$/{s|^$|$NDS|}" $f/metadata.pegasus.txt > /dev/null 2>&1
+
+				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: 3ds' > /dev/null 2>&1;
+				then
+					echo -e "\nAdding Citra MMJ launch command(Citra MMJ needs to be opened in the background for it to work)"; sleep 3
+					ART='launch: am start\n -n org.citra.emu/.ui.EmulationActivity\n -a android.intent.action.VIEW\n -e GamePath "{file.path}"\n'
+					sed -i "0,/^$/{s|^$|$ART|}" $f/metadata.pegasus.txt > /dev/null 2>&1
 				fi
 			fi
 		done
