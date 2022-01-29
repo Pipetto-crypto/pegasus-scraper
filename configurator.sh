@@ -16,6 +16,55 @@ else
 fi
 }
 
+
+while true
+do
+	echo -e "Select option"	
+	read opt
+	if test "$opt" == 1;
+		nano $HOME/.skyscraper/config.ini
+		read -p "Do you want to go back to the menu(y/n)?:" pmpt
+		while true
+		do
+			if test "$pmpt" == "y";
+			then
+				break
+			elif test "$pmpt" == "n";
+			then
+				break
+		    	break
+			else
+				echo -e "Invalid option,retry"
+			fi
+		done
+	elif test "$opt" == "2";
+	then
+			echo -e "\nStarting scraping, answer when prompted"
+        	read -p "Select platforms to scrap games for(separate them with spaces):" plats
+        	read -p "Select a scraper module to use, screenscraper highly suggested:"  scrap
+        	for i in $plats
+        	do
+        		skyscraper -p $i -s $scrap --addext '*.chd'
+			skyscraper -p $i --addext '*.chd'
+        	done
+			read -p "Do you want to go back to the menu(y/n)?:" pmpt
+		while true
+		do
+			if test "$pmpt" == "y";
+			then
+				break
+			elif test "$pmpt" == "n";
+			then
+				break
+		    	break
+			else
+				echo -e "Invalid option,retry"
+			fi
+		done
+
+
+
+
 while true
 do
 read -p "Do you want to modify your config file to add new systems(y/n)?:" prompt
