@@ -32,9 +32,7 @@ do
 	if test "$opt" == 1;
 	then
 		nano $HOME/.skyscraper/config.ini
-		read -p "Do you want to go back to the menu(y/n)?:" pmpt
 
-	
 	elif test "$opt" == "2";
 	then
 		echo -e "\nStarting scraping, answer when prompted"
