@@ -23,6 +23,7 @@ do
 	echo -e "Select option"	
 	read opt
 	if test "$opt" == 1;
+	then
 		nano $HOME/.skyscraper/config.ini
 		read -p "Do you want to go back to the menu(y/n)?:" pmpt
 		while true
