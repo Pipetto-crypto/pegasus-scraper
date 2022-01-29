@@ -21,24 +21,19 @@ fi
 while true
 do
 	echo -e "Select option"	
-	read opt
+	echo -e "\n1.Open config file to add new systems"
+	echo -e "2.Scrape your existing systems"
+	echo -e "3.Add launch commands manually(Read the DISCLAIMER)"
+	echo -e "4.Add launch commands automatically"
+	echo -e "5.Configure Pegasus Frontend"
+	echo -e "6.Update the configuration script"
+	echo -e "7.Exit"
 	if test "$opt" == 1;
 	then
 		nano $HOME/.skyscraper/config.ini
 		read -p "Do you want to go back to the menu(y/n)?:" pmpt
-		while true
-		do
-			if test "$pmpt" == "y";
-			then
-				break
-			elif test "$pmpt" == "n";
-			then
-				break
-		    	break
-			else
-				echo -e "Invalid option,retry"
-			fi
-		done
+
+	
 	elif test "$opt" == "2";
 	then
 		echo -e "\nStarting scraping, answer when prompted"
@@ -48,73 +43,11 @@ do
         do
         	skyscraper -p $i -s $scrap --addext '*.chd'
 			skyscraper -p $i --addext '*.chd'
-        done
-		read -p "Do you want to go back to the menu(y/n)?:" pmpt
-		while true
-		do
-			if test "$pmpt" == "y";
-			then
-				break
-			elif test "$pmpt" == "n";
-			then
-				break
-		    	break
-			else
-				echo -e "Invalid option,retry"
-			fi
 		done
-	else
-		echo -e "Invalid option, retry"
-	fi
-done
-
-
-
-while true
-do
-read -p "Do you want to modify your config file to add new systems(y/n)?:" prompt
-if test "$prompt" == "y";
-then 
-	nano $HOME/.skyscraper/config.ini
-	break
-elif test "$prompt" == "n";
-then
-	break
-else
-	echo -e "Invalid option, retry"
-	continue
-fi
-done
-
-while true
-do
-	read -p "Do you want to scrape your systems(y/n)?:" prompt2
-	if test "$prompt2" == "y";
-	then 
-		echo -e "\nStarting scraping, answer when prompted"
-        	read -p "Select platforms to scrap games for(separate them with spaces):" plats
-        	read -p "Select a scraper module to use, screenscraper highly suggested:"  scrap
-        	for i in $plats
-        	do
-        		skyscraper -p $i -s $scrap --addext '*.chd'
-			skyscraper -p $i --addext '*.chd'
-        	done
-		break
-	elif test "$prompt2" == "n";
+	
+	elif test "$opt" == "3";
 	then
-		break
-	else
-		echo -e "You selected an invalid option, go back"
-		continue
-	fi
-done
 
-
-while true
-do
-	read -p "Do you want to add launch commands manually(Read the DISCLAIMER)(y/n)?:" pmtman
-	if test "$pmtman" == "y";
-	then
 		grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
 		for f in $(cat temp.txt)
 		do
@@ -125,22 +58,10 @@ do
 				nano $f/metadata.pegasus.txt
 			fi
 		done
-		break
-	elif test "$pmtman" == "n";
+	
+	elif test "$opt" == "4";
 	then
-		break
-	else
-		echo -e "Invalid option, retry"
-	fi
-done
-
-
-while true
-do
-	read -p "Do you want to insert launch commands for your emulators(y/n)?:" prompt3
-	if test "$prompt3" == "y";
-	then
-		grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
+			grep -o '"/.*"' $HOME/.skyscraper/config.ini | sed 's/"//g' > temp.txt
 		for f in $(cat temp.txt)
 		do
 			if grep -oq 'launch:' $f/metadata.pegasus.txt;
@@ -291,21 +212,8 @@ do
 				fi
 			fi
 		done
-		break
-	elif test "$prompt3" == "n";
-	then
-		 break
-	else
-		echo -e "Invalid option, retry"
-		continue
-	fi
-done
 
-while true 
-do
-	echo -e "\n"
-	read -p "Do you want me to configure Pegasus for you(y/n)?:" prompt4
-	if test "$prompt4" == "y";
+	elif test "$opt" == "5";
 	then
 		mkdir -p /sdcard/pegasus-frontend
 		rm -rf /sdcard/pegasus-frontend/game_dirs.txt
@@ -315,35 +223,18 @@ do
 		do
 			echo "$f" >> /sdcard/pegasus-frontend/game_dirs.txt
 		done
-		break
-	elif test "$prompt4" == "n";
-	then
-		break
-	else
-	echo -e "Invalid option,retry"
-	continue
-fi
-done
-
-while true 
-do
-	echo -e "\n"
-	read -p "Do you want to update the configuration script(y/n)?:" prompt5
-	if test "$prompt5" == "y";
+	
+	elif test "$opt" == "6";
 	then
 		rm -rf configurator.sh
 		wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
-		echo -e "\nUpdated"
-		break
-	elif test "$prompt5" == "n";
+		echo -e "\nUpdated, exit and relaunch the script"
+	
+	elif test "$opt" == "7";
 	then
 		break
-	else 
+
+	else
 		echo -e "Invalid option, retry"
 	fi
 done
-
-
-echo -e "\nDone"
-rm -rf temp.txt
-
