@@ -28,6 +28,7 @@ do
 	echo -e "5.Configure Pegasus Frontend"
 	echo -e "6.Update the configuration script"
 	echo -e "7.Exit"
+	read -s opt
 	if test "$opt" == 1;
 	then
 		nano $HOME/.skyscraper/config.ini
