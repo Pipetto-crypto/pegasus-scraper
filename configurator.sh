@@ -20,7 +20,7 @@ fi
 
 while true
 do
-	echo -e "Select option"	
+	echo -e "\nSelect option"	
 	echo -e "\n1.Open config file to add new systems"
 	echo -e "2.Scrape your existing systems"
 	echo -e "3.Add launch commands manually(Read the DISCLAIMER)"
