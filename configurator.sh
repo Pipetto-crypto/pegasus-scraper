@@ -61,7 +61,8 @@ do
 				echo -e "Invalid option,retry"
 			fi
 		done
-
+	fi
+done
 
 
 
