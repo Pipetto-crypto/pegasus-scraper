@@ -227,7 +227,7 @@ do
 	then
 		rm -rf configurator.sh
 		wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
-		echo -e "\nUpdated, now exiting
+		echo -e "\nUpdated, now exiting"
 		break	
 	elif test "$opt" == "7";
 	then
