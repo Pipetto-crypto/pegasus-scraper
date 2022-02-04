@@ -230,7 +230,11 @@ do
 		echo -e "\nUpdated, now exiting"
 		break	
 	elif test "$opt" == "7";
-	then
+	then	
+		if test -f temp.txt;
+		then
+			rm temp.txt
+		fi
 		break
 
 	else
