@@ -235,11 +235,16 @@ do
 		echo -e "\nUpdated, now exiting"
 		break	
 	elif test "$opt" == "7";
+<<<<<<< HEAD
 	then	
 		if test -f temp.txt;
 		then
 			rm temp.txt
 		fi
+=======
+	then
+		rm -rf temp.txt
+>>>>>>> 3c8facf (updated scripts)
 		break
 
 	else
