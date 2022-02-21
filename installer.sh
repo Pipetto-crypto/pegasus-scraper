@@ -84,6 +84,7 @@ pkg clean && pkg autoclean
 rm -rf configurator.sh
 echo -e "\n"
 wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
+chmod a+x configurator.sh
 mv configurator.sh $PATH/pegasus-config
 
 
