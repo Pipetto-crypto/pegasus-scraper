@@ -20,7 +20,7 @@ fi
 
 while true
 do
-	echo -e "\nSelect option"	
+	echo -e "\nSelect an option"	
 	echo -e "\n1.Open config file to add new systems"
 	echo -e "2.Scrape your existing systems"
 	echo -e "3.Add launch commands manually(Read the DISCLAIMER)"
@@ -28,7 +28,8 @@ do
 	echo -e "5.Configure Pegasus Frontend"
 	echo -e "6.Update the configuration script"
 	echo -e "7.Exit"
-	read -s opt
+	echo -e "\n"
+	read -p "Input the selected option number:" opt
 	if test "$opt" == 1;
 	then
 		nano $HOME/.skyscraper/config.ini
@@ -214,6 +215,7 @@ do
 
 	elif test "$opt" == "5";
 	then
+		echo -e "\nStarting configuration process";sleep 5
 		mkdir -p /sdcard/pegasus-frontend
 		rm -rf /sdcard/pegasus-frontend/game_dirs.txt
 		touch /sdcard/pegasus-frontend/game_dirs.txt
@@ -222,11 +224,13 @@ do
 		do
 			echo "$f" >> /sdcard/pegasus-frontend/game_dirs.txt
 		done
-	
+		echo -e "\nDone";sleep 5		
+
 	elif test "$opt" == "6";
 	then
 		rm -rf configurator.sh
 		wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
+		mv configurator.sh $PATH/pegasus-config
 		echo -e "\nUpdated, now exiting"
 		break	
 	elif test "$opt" == "7";
