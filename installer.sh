@@ -37,6 +37,9 @@ pkg install x11-repo -y
 echo -e "\nInstalling dependencies"; sleep 2
 echo -e "\n"
 pkg install git qt5-qtbase build-essential wget -y 
+pkg remove --purge qt5-qtbase
+wget -L 
+dpkg -i qt5-qtbase_5.12.11-8_aarch64.deb
 if test ! -f $PATH/skyscraper;
 then   
 	echo -e "\nCloning, compiling and installing Skyscraper"; sleep 2
