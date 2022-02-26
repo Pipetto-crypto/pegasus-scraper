@@ -38,7 +38,7 @@ echo -e "\nInstalling dependencies"; sleep 2
 echo -e "\n"
 pkg install git qt5-qtbase build-essential wget -y 
 pkg remove --purge qt5-qtbase
-wget -L 
+wget -L https://github.com/Pipetto-crypto/pegasus-scraper/raw/master/deps/qt5-qtbase_5.12.11-8_aarch64.deb 
 dpkg -i qt5-qtbase_5.12.11-8_aarch64.deb
 if test ! -f $PATH/skyscraper;
 then   
