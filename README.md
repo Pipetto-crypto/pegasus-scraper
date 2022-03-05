@@ -12,7 +12,7 @@ termux-setup-storage,  answer yes when prompted.
 
 curl -O -L https://github.com/Pipetto-crypto/pegasus-scraper/raw/master/installer.sh && source installer.sh
 
-Paste bash configurator.sh everytime you want to scrape new games.
+Type pegasus-config everytime you want to scrape new games.
 
 # About The Scripts
 
