@@ -75,13 +75,13 @@ do
 					sed -i "0,/^$/{s|^$|$PS2|}" $f/metadata.pegasus.txt > /dev/null 2>&1
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: gc' > /dev/null 2>&1;
 				then
-					echo -e "\nAdding Dolphin MMJR launch command"; sleep 3
-					GC='launch: am start\n -n org.mm.jr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
+					echo -e "\nAdding Dolphin MMJR2 launch command"; sleep 3
+					GC='launch: am start\n -n org.dolphinemu.mmjr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
 					sed -i "0,/^$/{s|^$|$GC|}" $f/metadata.pegasus.txt > /dev/null	2>&1		
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: wii' > /dev/null 2>&1;
 				then
-					echo -e "\nAdding Dolphin MMJR launch command"; sleep 3
-					WII='launch: am start\n -n org.mm.jr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
+					echo -e "\nAdding Dolphin MMJR2 launch command"; sleep 3
+					WII='launch: am start\n -n org.dolphinemu.mmjr/org.dolphinemu.dolphinemu.ui.main.MainActivity\n -a android.intent.action.VIEW\n --es AutoStartFile "{file.path}"\n'
 					sed -i "0,/^$/{s|^$|$WII|}" $f/metadata.pegasus.txt > /dev/null	2>&1
 				elif awk 'NR==2' $f/metadata.pegasus.txt|grep 'shortname: psx' > /dev/null 2>&1;
 				then
