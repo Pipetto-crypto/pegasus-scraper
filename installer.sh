@@ -5,7 +5,7 @@ do
 	read -p "Before I start, do you want me to fetch Pegasus for you?(y/n):" instpmt
 	if test "$instpmt" == "y";
 		then
-		curl -o pegasus.apk -L https://github.com/mmatyas/pegasus-frontend/releases/download/continuous/pegasus-fe_alpha15-101-g8425a4f6_android.apk 
+		curl -o pegasus.apk -L https://github.com/mmatyas/pegasus-frontend/releases/download/continuous/pegasus-fe_alpha16-8-g438d0f25_android.apk
 		mv pegasus.apk /storage/emulated/0
 		while true
 		do

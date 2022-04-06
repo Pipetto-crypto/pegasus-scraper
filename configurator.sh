@@ -169,11 +169,11 @@ do
 					while true 
 					do
 						echo -e "\n"
-						read -p "About to add PPSSPP RetroArch core. Do you want me to fall back to PPSSPP standalone app(only works with PPSSPP v1.11.3 and below)(y/n)?:" psppmt
+						read -p "About to add PPSSPP RetroArch core. Do you want me to add PPSSPP instead(for this to work you need to select the folder where you have games in Pegasus's settings/Accesible Android directories(y/n)?:" psppmt
 						if test "$psppmt" == "y";
 						then
 							echo -e "\nAdding PPSSPP launch command"; sleep 3
-							PSP='launch: am start\n -n org.ppsspp.ppsspp/.PpssppActivity\n -a android.intent.action.VIEW\n -d "{file.path}"\n'
+							PSP='launch: am start\n -n org.ppsspp.ppsspp/.PpssppActivity\n -a android.intent.action.VIEW\n -d "{file.documenturi}"\n'
 							sed -i "0,/^$/{s|^$|$PSP|}" $f/metadata.pegasus.txt > /dev/null 2>&1
 							break
 						elif test "$psppmt" == "n";
