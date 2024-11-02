@@ -30,26 +30,26 @@ done
 
 
 echo -e "\n"
-echo -e "Updating, upgrading packages and install x11-repo"; sleep 2
+echo -e "Updating and upgrading packages"; sleep 2
 echo -e "\n"
-pkg update -y 
-pkg install x11-repo -y
+pkg upgrade -y
 echo -e "\nInstalling dependencies"; sleep 2
 echo -e "\n"
-pkg install git qt5-qtbase build-essential wget -y 
+pkg install zip unzip git qt5-qmake qt5-qtbase build-essential wget -y 
 if test ! -f $PATH/skyscraper;
 then   
-	echo -e "\nCloning, compiling and installing Skyscraper"; sleep 2
-	echo -e "\n"
-    git clone https://github.com/muldjord/skyscraper.git
-    cd skyscraper
+    echo -e "\nDownloading, compiling and installing Skyscraper"; sleep 2
+    echo -e "\n"
+    wget https://github.com/muldjord/skyscraper/archive/refs/heads/master.zip
+    unzip skyscraper-master.zip
+    cd skyscraper-master
     qmake
     make
     mv Skyscraper $PATH/skyscraper
-	echo -e "\nInstalled, returning back to home folder"; sleep 2
-	cd ..
+    echo -e "\nInstalled, returning back to home folder"; sleep 2
+    cd ..
 else
-	echo -e "\nSkyscraper already installed, skipping"; sleep 2
+    echo -e "\nSkyscraper already installed, skipping"; sleep 2
 fi 
 
 mkdir -p .skyscraper
@@ -76,11 +76,10 @@ else
 	echo -e "\nconfig.ini already present, skipping"; sleep 2
 fi
 
-echo -e "\nFetching scraper script and cleaning"
+echo -e "\nFetching scraper script and cleaning workdir up"
 rm -rf skyscraper
 rm -rf installer.sh
 rm -rf /sdcard/pegasus.apk
-pkg clean && pkg autoclean
 rm -rf configurator.sh
 echo -e "\n"
 wget -L https://raw.githubusercontent.com/Pipetto-crypto/pegasus-scraper/master/configurator.sh
